@@ -268,7 +268,7 @@ namespace games
 
 	void Graphics::FontCenter(FontHandle handle)
 	{
-		if (CheckFoontResource(handle))
+		if (CheckFontResource(handle))
 		{
 			IDWriteTextFormat *text = textFormatList[handle];
 			text->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);           //Ë®Æ½¾ÓÖÐ
@@ -504,7 +504,7 @@ namespace games
 		FLOAT alpha
 		)
 	{
-		if (!CheckFoontResource(textFormat) ||
+		if (!CheckFontResource(textFormat) ||
 			!m_pRenderTarget || !renderState)
 			return false;
 

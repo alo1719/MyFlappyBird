@@ -187,7 +187,7 @@ namespace games
 
 		// check the bitmap resources is existance.
 		bool CheckBitmapResource(const wstring &str);
-		bool CheckFoontResource(FontHandle handle);
+		bool CheckFontResource(FontHandle handle);
 
 		HRESULT LoadBitmapFromFile(
 			PCWSTR uri,
