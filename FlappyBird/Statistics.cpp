@@ -71,13 +71,6 @@ namespace games
         last_ = score;
     }
 
-    void Statistics::TrainLastScore(int score)
-    {
-        if (trainMax_ < score)
-            trainMax_ = score;
-        trainLast_ = score;
-    }
-
     void Statistics::Run()
     {
         static DWORD last = GetTickCount();
@@ -119,8 +112,6 @@ namespace games
         std::wstringstream stream;
         stream << L"最高分: " << max_ << std::endl;
         stream << L"上次得分: " << last_ << std::endl;
-        stream << L"电脑最高分: " << trainMax_ << std::endl;
-        stream << L"电脑上次得分: " << trainLast_ << std::endl;
         std::wstring msg = stream.str();
         Graphics::Instance().DrawText(
             msg.c_str(),

@@ -100,10 +100,17 @@ namespace games
 
         top += 50;
         bottom = top + 40;
-        if (UIControl::TextButton(state, 3, selectButtonFont, L"统计数据", left, top, right, bottom))
+        if (UIControl::TextButton(state, 2, selectButtonFont, L"统计数据", left, top, right, bottom))
         {
             Statistics();
         }
+
+		top += 50;
+		bottom = top + 40;
+		if (UIControl::TextButton(state, 3, selectButtonFont, L"关于作者", left, top, right, bottom))
+		{
+			Statistics();
+		}
 
         UIFinish(state);
     }

@@ -24,7 +24,6 @@ namespace games
     private:
         void UpdateGround(float ElapsedTime);
         void BeginGames();
-        void TrainComputer();
         void Statistics();
 
     private:
