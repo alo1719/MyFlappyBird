@@ -80,6 +80,9 @@
   <ItemGroup>
     <ResourceCompile Include="FlappyBird.rc" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{D8B0675F-8C9B-4C53-905E-532F1DB753EE}</ProjectGuid>
     <RootNamespace>Mario</RootNamespace>

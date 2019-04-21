@@ -1,0 +1,361 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="json11::Value&lt;tag, T&gt;" Collapsed="true">
+    <Position X="7.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAACAAAAAAAAAAARBAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>json11.cpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="json11::JsonDouble" Collapsed="true">
+    <Position X="1" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAKAAAABAAAAAAIAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>json11.cpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="json11::JsonInt" Collapsed="true">
+    <Position X="3.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAKAAAEBAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>json11.cpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="json11::JsonBoolean" Collapsed="true">
+    <Position X="5.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>json11.cpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="json11::JsonString" Collapsed="true">
+    <Position X="7.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>json11.cpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="json11::JsonArray" Collapsed="true">
+    <Position X="10" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>json11.cpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="json11::JsonObject" Collapsed="true">
+    <Position X="12.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAAAAAAgAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>json11.cpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="json11::JsonNull" Collapsed="true">
+    <Position X="14.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>json11.cpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="json11::JsonValue" Collapsed="true">
+    <Position X="7.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAOAAACBAAgCAAAAAAFBABAAAAAAAAAAAAA=</HashCode>
+      <FileName>json11.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="json11::Json" Collapsed="true">
+    <Position X="18.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>hEAAIBAAAAMABAGBAAgEAQAAACEBABCAAAAgAAAAIgA=</HashCode>
+      <FileName>json11.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="games::Collision" Collapsed="true">
+    <Position X="20.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAQAAAAAAACQAAAAABAAAAAAA=</HashCode>
+      <FileName>Collision.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="games::Sprite" Collapsed="true">
+    <Position X="20.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAAAKAAAgCCAAAAAAQAAgAAQAAAAI=</HashCode>
+      <FileName>Sprite.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="games::Animation" Collapsed="true">
+    <Position X="17" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAACAAAIAAAAgAAAAAgUAAgICAAAYAAgAAAABgE=</HashCode>
+      <FileName>Animation.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="games::GameState" Collapsed="true">
+    <Position X="0.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>M3AkGAQEPAIBIEUwpIE4QAggCIhAOCGAAFwhIAIpIQI=</HashCode>
+      <FileName>GameState.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="games::Statistics" Collapsed="true">
+    <Position X="3" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAkAAQAAAAQIUAUAACAQAAAAABIIDAEAAgAYAAIAAI=</HashCode>
+      <FileName>Statistics.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="games::UIControl" Collapsed="true">
+    <Position X="18.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UIControl.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="games::UIPanelState" Collapsed="true">
+    <Position X="5.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAEACQAIAAAAEAUAAAAQAAAAQBAKCAEAAgAIAAAAAI=</HashCode>
+      <FileName>UIPanelState.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="games::Application" Collapsed="true">
+    <Position X="18.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAEBACABBAQAAQIQAUAAAAIAAACAAQAQAgAYCgAAAA=</HashCode>
+      <FileName>Application.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="games::IStateMachine" Collapsed="true">
+    <Position X="3" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAABAAI=</HashCode>
+      <FileName>BaseStateMachine.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="games::BaseStateMachine" Collapsed="true">
+    <Position X="3" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAA=</HashCode>
+      <FileName>BaseStateMachine.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="games::Graphics" Collapsed="true">
+    <Position X="22.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CUIIAEERAAAAAAEyQAUAiA4ACJIABIgDQEQAJCAAAoE=</HashCode>
+      <FileName>Graphics.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="games::Handler&lt;T&gt;" Collapsed="true">
+    <Position X="17" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAgAAAAAIIAAAAACAAAAAAAAAAAAAAABAAAAAAAQ=</HashCode>
+      <FileName>Handler.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="games::Handler&lt;void&gt;" Collapsed="true">
+    <Position X="24" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAgAAAAAIIAAAAACAAAAAAAAAAAAAAABAAAAAAAQ=</HashCode>
+      <FileName>Handler.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="games::MessageQueue" Collapsed="true">
+    <Position X="22.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACBAAEAAAAAAAAAAAjBAAAAAAABAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>MessageQueue.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="games::StateMachine" Collapsed="true">
+    <Position X="22.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAIAEAIAAAABAAAAAAAAAAAIAgAAAQAAABAIAAAI=</HashCode>
+      <FileName>StateMachine.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="games::TimeCounter" Collapsed="true">
+    <Position X="17" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAwAAACCAgACAAAAIAAAAEAQAEBAACgABABBABAAQAA=</HashCode>
+      <FileName>TimeCounter.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="games::Resource&lt;resID&gt;" Collapsed="true">
+    <Position X="0.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAgAAAAAAAAAAICAAAAACAAAAAAAAA=</HashCode>
+      <FileName>ResourceManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="games::ResourceLibrary&lt;resID, Type&gt;" Collapsed="true">
+    <Position X="0.5" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAgEACAIBAAAAEAAAAAAAQAAEQIAAACAAAAAAAAAA=</HashCode>
+      <FileName>ResourceManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Music" Collapsed="true">
+    <Position X="24" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEQEApCYCAAABQAgAAIEAQAEACRoAIMAQKEAAA=</HashCode>
+      <FileName>Music.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicManager" Collapsed="true">
+    <Position X="17" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAIAAAAAJBAAQAAAAAAAAAAQAAAAAAAgAgAGJAEAII=</HashCode>
+      <FileName>MusicManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QLearning" Collapsed="true">
+    <Position X="18.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAIggAACAioEAAAABAAGDCAgAAAAAAEgAAAAoAAAA=</HashCode>
+      <FileName>QLearning.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ThreadPool&lt;Type&gt;" Collapsed="true">
+    <Position X="24" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAEAACAAAAAAAAAAAABAAAAAAAAAAAAgBAACAAAQA=</HashCode>
+      <FileName>ThreadPool.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JsonUlit" Collapsed="true">
+    <Position X="20.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAgAAAAAAACAAAAAAACAAAAAABAAAAAAAAAAhAIABg=</HashCode>
+      <FileName>JsonUlit.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Uninheritable&lt;OnlyFriend&gt;" Collapsed="true">
+    <Position X="20.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>LanguageExtend.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="json11::Statics" Collapsed="true">
+    <Position X="22.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAgAAAAAAAAAIAAAAAAAAAAgAYAAQAAAAAAAA=</HashCode>
+      <FileName>json11.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="json11::JsonParser" Collapsed="true">
+    <Position X="20.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>GAAAAiAAAIAAAAAAAAAACAAACAAJECAAIACAAgAAAAA=</HashCode>
+      <FileName>json11.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="games::APPConfig" Collapsed="true">
+    <Position X="17" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAgQAAAAAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Application.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="games::Counter" Collapsed="true">
+    <Position X="18.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAQAAAAAAAAAAAAAAAAAAAAABAAAAAAAAgA=</HashCode>
+      <FileName>TimeCounter.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="games::UIState" Collapsed="true">
+    <Position X="24" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAEAQAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UIBase.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="tagMusicParam" Collapsed="true">
+    <Position X="9.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EIAAAAAQEAAAgAAAAAAAAJAAAAEAAAAAsAIAAAAEAAA=</HashCode>
+      <FileName>MusicManager.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Typedef Name="MusicParam" Collapsed="true">
+    <Position X="9.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MusicManager.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="games::FontHandle" Collapsed="true">
+    <Position X="17" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Graphics.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="games::UIID" Collapsed="true">
+    <Position X="20.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UIBase.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="games::resource" Collapsed="true">
+    <Position X="18.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ResourceManager.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Enum Name="json11::JsonParse" Collapsed="true">
+    <Position X="22.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>json11.hpp</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="games::GAMESTATE" Collapsed="true">
+    <Position X="18.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAIAAAAAKAAAAACAAAAAAAA=</HashCode>
+      <FileName>GameState.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="games::COLLISIONRESULT" Collapsed="true">
+    <Position X="17" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAACAACAAAAEIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameState.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="games::MouseEvent" Collapsed="true">
+    <Position X="17" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAECAAAABAAAAAAAFAQAAAAAAAQAAAAAAAEACAAAAIA=</HashCode>
+      <FileName>Application.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="games::KeywordEvent" Collapsed="true">
+    <Position X="24" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Application.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="games::RenderLevel" Collapsed="true">
+    <Position X="18.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAAAgAAAAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Graphics.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="games::GameStatus" Collapsed="true">
+    <Position X="20.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAEAAAAAAQAAAAQAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>StateMachine.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
