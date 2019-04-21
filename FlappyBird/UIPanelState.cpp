@@ -49,13 +49,6 @@ namespace games
 
     void UIPanelState::BeginGames()
     {
-        GameState::instance().setAIEnable(false);
-        StateMachine::Instance().NextState(GameStatus::GAME_STATUS);
-    }
-
-    void UIPanelState::TrainComputer()
-    {
-        GameState::instance().setAIEnable();
         StateMachine::Instance().NextState(GameStatus::GAME_STATUS);
     }
 
@@ -103,13 +96,6 @@ namespace games
         if (UIControl::TextButton(state, 1, selectButtonFont, L"开始游戏", left, top, right, bottom))
         {
             BeginGames();
-        }
-
-        top += 50;
-        bottom = top + 40;
-        if (UIControl::TextButton(state, 2, selectButtonFont, L"电脑训练", left, top, right, bottom))
-        {
-            TrainComputer();
         }
 
         top += 50;

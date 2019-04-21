@@ -10,7 +10,6 @@
 #include "Collision.h"
 #include "Statistics.h"
 #include "StateMachine.h"
-#include "QLearning.h"
 #include "constant.h"
 #include "ThreadPool.h"
 
@@ -45,7 +44,6 @@ namespace games
 
         initialize();
 
-        ai = std::make_shared<QLearning>();
     }
 
     GameState::~GameState()
@@ -205,15 +203,7 @@ namespace games
     void GameState::Died()
     {
         fly->end();
-        if (AI)
-        {
-            Statistics::instance().TrainLastScore(score);
-            ai->die();
-        }
-        else
-        {
-            Statistics::instance().LastScore(score);
-        }
+        Statistics::instance().LastScore(score);
     }
 
     void GameState::Run()
@@ -238,15 +228,6 @@ namespace games
             int tPipeIndex;
             collisionResult = CheckCollision(tPipeIndex);
 
-            if (AI)
-            {
-                float h_dis = 9999, v_dis = -9999, vg_dis = -9999;
-                GetBirdState(h_dis, v_dis, vg_dis);
-                if (collisionResult)
-                    ai->run(h_dis, v_dis, vg_dis, 0);
-                else 
-                    ai->run(h_dis, v_dis, vg_dis, 1);
-            }
 
             switch (collisionResult)
             {
@@ -354,10 +335,6 @@ namespace games
             {
                 keyDown = false;
             }
-            else if (AI && event == KeywordEvent::KEYDOWN && state == VK_ESCAPE) 
-            {
-                AI = false;
-            }
         }
         else if (gameState == GAMESTATE_READY)
         {
@@ -371,17 +348,12 @@ namespace games
         {
             if (event == KeywordEvent::KEYDOWN && state == VK_SPACE)
             {
-                if (!AI)
-                    StateMachine::Instance().NextState(GameStatus::UI_STATISTICS);
+                StateMachine::Instance().NextState(GameStatus::UI_STATISTICS);
                 Restart();
             }
         }
     }
 
-    void GameState::setAIEnable(bool state)
-    {
-        AI = state;
-    }
 
     void GameState::DrawMap()
     {

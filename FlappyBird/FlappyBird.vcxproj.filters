@@ -90,9 +90,6 @@
     <ClCompile Include="Statistics.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="QLearning.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="ThreadPool.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -168,9 +165,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Statistics.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="QLearning.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">

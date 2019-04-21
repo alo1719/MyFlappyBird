@@ -33,7 +33,6 @@
     <ClCompile Include="MessageQueue.cpp" />
     <ClCompile Include="Music.cpp" />
     <ClCompile Include="MusicManager.cpp" />
-    <ClCompile Include="QLearning.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="StateMachine.cpp" />
@@ -61,7 +60,6 @@
     <ClInclude Include="MessageQueue.h" />
     <ClInclude Include="Music.h" />
     <ClInclude Include="MusicManager.h" />
-    <ClInclude Include="QLearning.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Sprite.h" />

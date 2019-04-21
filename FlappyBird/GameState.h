@@ -5,8 +5,6 @@
 #include "BaseStateMachine.h"
 #include "MusicManager.h"
 
-class QLearning;
-
 template<typename Type> class ThreadPool;
 
 namespace games
@@ -130,9 +128,6 @@ namespace games
         GAMESTATE gameState;
         FontHandle tipsFont;
         FontHandle scoreFont;
-
-        bool AI;
-        std::shared_ptr<QLearning> ai;
 
         D2D1_RECT_F getReadImageSize;
         D2D1_RECT_F gameOverImageSize;
