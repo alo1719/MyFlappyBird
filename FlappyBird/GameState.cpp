@@ -17,6 +17,7 @@ using games::KeywordEvent;
 
 namespace games
 {
+	// 返回自上次调用TimeTick后经过的时间
     double TimeTick() 
     {
         static double last = TimeCounter::instance().getTick();
@@ -32,6 +33,7 @@ namespace games
         MP.ID = music->GetID();
         MP.StartPosition = 0;
         MP.Play = true;
+		// g_MusicMessageQueue为与音乐线程进行通信的消息队列
         g_MusicMessageQueue.push(MP);
     }
 
@@ -43,7 +45,6 @@ namespace games
         Graphics::Instance().FontCenter(scoreFont);
 
         initialize();
-
     }
 
     GameState::~GameState()
@@ -51,17 +52,13 @@ namespace games
         Graphics::Instance().DestroyFontObject(tipsFont);
         Graphics::Instance().DestroyFontObject(scoreFont);
 
-        //通知子线程退出
+        // 通知子线程退出
         MusicParam MP;
         MP.Exit = true;
         g_MusicMessageQueue.push(MP);
-        WaitForSingleObject(g_hThreadForMusic, INFINITE);		//等待子线程退出
 
-        //delete music_die;
-        //delete music_hit;
-        //delete music_wing;
-        //delete music_point;
-        //delete pMusicManager;
+		// 等待子线程退出
+        WaitForSingleObject(g_hThreadForMusic, INFINITE);
     }
 
     GameState & GameState::instance()
@@ -70,6 +67,7 @@ namespace games
         return game;
     }
 
+	// 初始化游戏内容
     void GameState::initialize()
     {
         std::wstring &path = GetAppPath();
@@ -79,17 +77,22 @@ namespace games
         std::wstring soundWing = path + L"Resource\\sounds\\wing.wav";
         std::wstring soundPoint = path + L"Resource\\sounds\\point.wav";
 
-        pMusicManager = new MusicManager();//初始化音乐管理对象
+		// 初始化音乐管理对象
+        pMusicManager = new MusicManager();
+
         music_die = new Music(soundDie);
         music_hit = new Music(soundHit);
         music_wing = new Music(soundWing);
         music_point = new Music(soundPoint);
+
         pMusicManager->AddMusic(music_die);
         pMusicManager->AddMusic(music_hit);
         pMusicManager->AddMusic(music_wing);
         pMusicManager->AddMusic(music_point);
+
+		// 创建线程
         g_hThreadForMusic = (HANDLE)_beginthreadex(NULL, 0, 
-            pMusicManager->ThreadForPlayMusic, NULL, 0, NULL);	//创建线程
+            pMusicManager->ThreadForPlayMusic, NULL, 0, NULL);
 
         // 初始化素材部分
         imgBackground = path + L"Resource\\background.png";
@@ -129,7 +132,7 @@ namespace games
         fly->setRestoreOriginalFrame(true);
         fly->setDelayPerUnit(90);
 
-        // 初始化小鸟 sprite
+        // 初始化小鸟Sprite
         std::wstring birdImage = path + L"Resource\\birds\\0.png";
         Graphics::Instance().GetBitmapSize(birdImage, birdSize);
         birds = std::make_shared<Sprite>();
@@ -138,6 +141,7 @@ namespace games
         Restart();
     }
 
+	// 初始化小鸟位置
     void GameState::initBirdPosition()
     {
         birdHeight = birdSize.height;
@@ -154,6 +158,7 @@ namespace games
 
     void GameState::Begin()
     {
+		// 是否按下按键
         keyDown = false;
 
         pipeIndex = 0;
@@ -171,7 +176,8 @@ namespace games
         PipeData tData;
 
         int y = rand() % (int)(MS_PIPECREATEYMAX - MS_PIPECREATEYMIN) + MS_PIPECREATEYMIN;
-        // 计算创建位置(空隙中心)
+
+        // 计算空隙中心创建位置
         ++pipeIndex;
         tData.pos.x = GAMES_SIZE_W + MS_PIPEWIDTH / 2.f;
         tData.pos.y = y;
@@ -203,6 +209,7 @@ namespace games
     void GameState::Died()
     {
         fly->end();
+		// 显示上次得分
         Statistics::instance().LastScore(score);
     }
 
@@ -216,18 +223,18 @@ namespace games
             break;
         case games::GAMESTATE_PLAYING:
         {
+			// 更新4大组件
             UpdateBird(ElapsedTime);
             UpdatePipes(ElapsedTime);
             UpdateGround(ElapsedTime);
             UpdatePathLogger(ElapsedTime);
 
-            // check
+            // 经过Pipe检测
             CheckScore();
 
             // 碰撞检测
             int tPipeIndex;
             collisionResult = CheckCollision(tPipeIndex);
-
 
             switch (collisionResult)
             {
@@ -237,6 +244,7 @@ namespace games
                 PlaySound(music_die);
                 gameState = GAMESTATE_DIYING;
                 break;
+			// 撞到地板直接死亡并结束游戏
             case COLLISIONRESULT_GROUND:
                 PlaySound(music_hit);
                 gameState = GAMESTATE_DIED;
@@ -247,6 +255,7 @@ namespace games
         }
         case games::GAMESTATE_DIYING:
         {
+			// 创建小鸟位置的椭圆
             D2D1_ELLIPSE ellipse{
                 { birdPos.x, birdPos.y },
                 MS_BIRDBOUNDINGCIRCLESIZE,
@@ -276,6 +285,7 @@ namespace games
 
     void GameState::OnRender()
     {
+		// 绘制4大组件
         DrawMap();
         DrawPipes();
         DrawPath();
@@ -289,14 +299,16 @@ namespace games
 
     void GameState::OnRenderUI()
     {
+		// 绘制主界面分数
         TCHAR temp[32] = { 0 };
         wsprintf(temp, TEXT("%d"), score);
         Graphics::Instance().DrawText(
             temp, 
             lstrlenW(temp), 
             scoreFont, 
+			// RectF参数为left, top, right, bottom
             D2D1::RectF(300, 0, 500, 100), 
-            0xffffff);
+            0x39b5cc);
 
         if (gameState == GAMESTATE_READY)
         {
@@ -307,6 +319,7 @@ namespace games
             D2D1_RECT_F rect = gameOverImageSize;
             Graphics::Instance().DrawBitmap(imgGamesOver, rect);
 
+			// 在图像下方绘制提示字体
             rect.top = rect.bottom + 10;
             rect.bottom += 40;
             wstring msg = L"按空格继续";
@@ -323,6 +336,7 @@ namespace games
     {
         if (gameState == GAMESTATE_PLAYING)
         {
+			// 按下了空格键
             if (event == KeywordEvent::KEYDOWN && state == VK_SPACE)
             {
                 if (!keyDown)
@@ -688,7 +702,7 @@ namespace games
 
     void GameState::CheckScore()
     {
-        for (auto i = pipes.begin(); i != pipes.end(); ++i)
+        for (auto i = pipes.begin(); i != pipes.end(); i++)
         {
             if (birdPos.x > i->pos.x && i->Passed == false)
             {
