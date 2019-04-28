@@ -59,7 +59,6 @@ namespace games
         virtual void OnMouseEvent(MouseEvent event, int x, int y);
         virtual void OnKeywordEvent(KeywordEvent event, unsigned int state);
 
-        void setAIEnable(bool state = true);
     private:
         void DrawMap();
         void DrawPipes();
@@ -125,6 +124,8 @@ namespace games
         COLLISIONRESULT collisionResult;
 
         bool died;
+		bool hasTopPipe = false;
+		bool hasBottomPipe = true;
         GAMESTATE gameState;
         FontHandle tipsFont;
         FontHandle scoreFont;

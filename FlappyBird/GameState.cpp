@@ -281,6 +281,7 @@ namespace games
         DrawPath();
         DrawBrid();
 
+// 只有在Debug模式下才绘制碰撞框
 #ifdef _DEBUG
         DrawCollisionBox();
 #endif
@@ -410,19 +411,25 @@ namespace games
                 bottomImage.right = MS_PIPEWIDTH;
             }
 
-            topScreen.top = 0;
-            topScreen.bottom = i->pos.y - MS_PIPEGAPHEIGHT / 2.f;
-            topImage.top = MS_PIPEHEIGHT - topScreen.bottom;
-            topImage.bottom = MS_PIPEHEIGHT;
+			topScreen.top = 0;
+			topScreen.bottom = i->pos.y - MS_PIPEGAPHEIGHT / 2.f;
+			topImage.top = MS_PIPEHEIGHT - topScreen.bottom;
+			topImage.bottom = MS_PIPEHEIGHT;
+			bottomScreen.top = i->pos.y + MS_PIPEGAPHEIGHT / 2.f;
+			bottomScreen.bottom = GAMES_SIZE_H - MS_GROUNDHEIGHT;
+			bottomImage.top = 0;
+			bottomImage.bottom = bottomScreen.bottom - bottomScreen.top;
 
-            bottomScreen.top = i->pos.y + MS_PIPEGAPHEIGHT / 2.f;
-            bottomScreen.bottom = GAMES_SIZE_H - MS_GROUNDHEIGHT;
-            bottomImage.top = 0;
-            bottomImage.bottom = bottomScreen.bottom - bottomScreen.top;
+			if (hasTopPipe)
+			{
+				Graphics::Instance().DrawBitmap(imgPipeTop, topScreen, topImage);
+			}
+            
+			if (hasBottomPipe)
+			{
+				Graphics::Instance().DrawBitmap(imgPipeBottom, bottomScreen, bottomImage);
 
-            // 绘制上下水管
-            Graphics::Instance().DrawBitmap(imgPipeTop, topScreen, topImage);
-            Graphics::Instance().DrawBitmap(imgPipeBottom, bottomScreen, bottomImage);
+			}
         }
     }
 
@@ -485,8 +492,15 @@ namespace games
             bottom.top = i->pos.y + MS_PIPEGAPHEIGHT / 2.f;
             bottom.bottom = GAMES_SIZE_H - MS_GROUNDHEIGHT;
 
-            Graphics::Instance().DrawRectangle(top, 0xff0000);
-            Graphics::Instance().DrawRectangle(bottom, 0xff0000);
+			if (hasTopPipe)
+			{
+				Graphics::Instance().DrawRectangle(top, 0xff0000);
+			}
+
+			if (hasBottomPipe)
+			{
+				Graphics::Instance().DrawRectangle(bottom, 0xff0000);
+			}
         }
 
         D2D1_POINT_2F p1{ 0, GAMES_SIZE_H - MS_GROUNDHEIGHT },
@@ -641,17 +655,25 @@ namespace games
             bottom.top = i->pos.y + MS_PIPEGAPHEIGHT / 2.f;
             bottom.bottom = GAMES_SIZE_H - MS_GROUNDHEIGHT;
 
-            // 进行碰撞检测
-            if (Collision::OBBCircleHitTest(top, ellipse))
-            {
-                PipeIndex = i->Index;
-                return COLLISIONRESULT_TOP_PIPE;
-            }
-            else if (Collision::OBBCircleHitTest(bottom, ellipse))
-            {
-                PipeIndex = i->Index;
-                return COLLISIONRESULT_BOTTOM_PIPE;
-            }
+            // 进行顶部碰撞检测
+			if (hasTopPipe)
+			{
+				if (Collision::OBBCircleHitTest(top, ellipse))
+				{
+					PipeIndex = i->Index;
+					return COLLISIONRESULT_TOP_PIPE;
+				}
+			}
+            
+			// 进行底部碰撞检测
+			if (hasBottomPipe)
+			{
+				if (Collision::OBBCircleHitTest(bottom, ellipse))
+				{
+					PipeIndex = i->Index;
+					return COLLISIONRESULT_BOTTOM_PIPE;
+				}
+			}
         }
 
         // 检查与地面的碰撞
