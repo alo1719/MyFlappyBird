@@ -341,11 +341,13 @@ namespace games
             {
                 if (!keyDown)
                 {
+					// 每次跳起, 播放动画, 改变速度
                     PlaySound(music_wing);
                     birdV = -MS_BIRDJUMPV;
                     keyDown = true;
                 }
             }
+			// 空格键弹起
             else if (event == KeywordEvent::KEYRUP && state == VK_SPACE)
             {
                 keyDown = false;
@@ -363,12 +365,12 @@ namespace games
         {
             if (event == KeywordEvent::KEYDOWN && state == VK_SPACE)
             {
+				// 显示计分板并重置游戏
                 StateMachine::Instance().NextState(GameStatus::UI_STATISTICS);
                 Restart();
             }
         }
     }
-
 
     void GameState::DrawMap()
     {
@@ -381,7 +383,7 @@ namespace games
             D2D1_RECT_F ground { 
                 MS_GROUNDWIDTH * i - groundOffset,
                 GAMES_SIZE_H - MS_GROUNDHEIGHT,
-                MS_GROUNDWIDTH * i + MS_GROUNDWIDTH - groundOffset, 
+                MS_GROUNDWIDTH * (i + 1) - groundOffset, 
                 GAMES_SIZE_H
             };
             Graphics::Instance().DrawBitmap(imgGround, ground);
@@ -442,7 +444,6 @@ namespace games
 			if (hasBottomPipe)
 			{
 				Graphics::Instance().DrawBitmap(imgPipeBottom, bottomScreen, bottomImage);
-
 			}
         }
     }
@@ -517,13 +518,16 @@ namespace games
 			}
         }
 
+		// 绘制地板碰撞盒
         D2D1_POINT_2F p1{ 0, GAMES_SIZE_H - MS_GROUNDHEIGHT },
             p2{ GAMES_SIZE_W, GAMES_SIZE_H - MS_GROUNDHEIGHT };
         Graphics::Instance().DrawLine(p1, p2, 0xff0000);
 
+		// 绘制小鸟碰撞圆
         Graphics::Instance().DrawEllipse(ellipse, 0xff0000);
     }
 
+	// 使小鸟上下浮动
     void GameState::FloatBird(double ElapsedTime)
     {
         static int count = 0, step = 1;
@@ -540,7 +544,7 @@ namespace games
                 birdPos.x + birdWidth / 2,
                 birdPos.y + birdHeight / 2);
 
-            if (++count >= 5)
+            if (++count >= 10)
             {
                 step = -step;
                 count = 0;
@@ -552,12 +556,14 @@ namespace games
     {
         // 改变鸟的垂直位置
         birdPos.y += birdV * ElapsedTime;
-        if (birdPos.y - MS_BIRDBOUNDINGCIRCLESIZE < 0.f) // 禁止越界
+		// 禁止越界
+        if (birdPos.y - MS_BIRDBOUNDINGCIRCLESIZE < 0.f)
             birdPos.y = MS_BIRDBOUNDINGCIRCLESIZE;
         if (birdPos.y + MS_GROUNDHEIGHT > GAMES_SIZE_H)
             birdPos.y = GAMES_SIZE_H - MS_GROUNDHEIGHT;
         birdV += MS_GRAVITY * ElapsedTime;
-        if (birdV >= MS_BIRDMAXV)  // 最大速度
+		// 限制最大速度
+        if (birdV >= MS_BIRDMAXV)  
             birdV = MS_BIRDMAXV;
 
         birds->setPosition(

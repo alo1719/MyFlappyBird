@@ -29,8 +29,8 @@
 #define MS_BIRDDROPV 400.f               // 旋转完成速度
 #define MS_BIRD_BEGIN_DROP 250.F         // 开始旋转速度
 
-#define MS_BIRDMAXROTATION (3.1415926f / 8.f)  // 朝上的最大角度, 默认/8
-#define MS_BIRDMINROTATION (3.1415926f / 8.f)   // 朝下的最大角度, 默认/2
+#define MS_BIRDMAXROTATION (3.1415926f / 12.f)  // 朝上的最大角度, 默认/8
+#define MS_BIRDMINROTATION (3.1415926f / 12.f)   // 朝下的最大角度, 默认/2
 #define MS_BIRDROTATIONWEIGHT   1.25f        // 旋转的插值权重
 
 #define MS_PATHLOGTIME          0.06f         // 路径记录时间间隔, 默认0.1
