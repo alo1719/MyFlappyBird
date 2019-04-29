@@ -92,22 +92,32 @@ namespace games
         float top = (GAMES_SIZE_H - 150 - 100) >> 1;
         float right = left + 100;
         float bottom = top + 40;
+		int32_t color = 0x39b5cc;
 
-        if (UIControl::TextButton(state, 1, selectButtonFont, L"开始游戏", left, top, right, bottom))
+		
+		Graphics::Instance().DrawText(
+			L"开始游戏",
+			lstrlenW(L"开始游戏"),
+			selectButtonFont,
+			// RectF参数为left, top, right, bottom
+			D2D1::RectF(left, top, right, bottom),
+			0xffffff);
+        if (UIControl::TextButton(state, 1, selectButtonFont, L"", left, top, right, bottom, color))
         {
+			
             BeginGames();
         }
 
         top += 50;
         bottom = top + 40;
-        if (UIControl::TextButton(state, 2, selectButtonFont, L"统计数据", left, top, right, bottom))
+        if (UIControl::TextButton(state, 2, selectButtonFont, L"统计数据", left, top, right, bottom, color))
         {
             Statistics();
         }
 
 		top += 50;
 		bottom = top + 40;
-		if (UIControl::TextButton(state, 3, selectButtonFont, L"关于作者", left, top, right, bottom))
+		if (UIControl::TextButton(state, 3, selectButtonFont, L"关于作者", left, top, right, bottom, color))
 		{
 			Statistics();
 		}

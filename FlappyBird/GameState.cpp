@@ -123,7 +123,7 @@ namespace games
 
         // 初始化小鸟动画
         fly = std::make_shared<Animation>();
-        for (int i = 0; i < 3; ++i)
+        for (int i = 0; i < 1; ++i)
         {
             TCHAR filename[MAX_PATH];
             wsprintf(filename, L"%sResource\\birds\\%d.png", path.c_str(), i);
