@@ -57,6 +57,11 @@ namespace games
         StateMachine::Instance().NextState(GameStatus::UI_STATISTICS);
     }
 
+	void UIPanelState::About()
+	{
+		StateMachine::Instance().NextState(GameStatus::UI_ABOUT);
+	}
+
     void UIPanelState::Run()
     {
         static DWORD last = GetTickCount();
@@ -88,6 +93,7 @@ namespace games
     {
         UIPrepare(state);
 
+		// 按钮的位置以及颜色
         float left = (GAMES_SIZE_W - 100) >> 1;
         float top = (GAMES_SIZE_H - 150 - 100) >> 1;
         float right = left + 100;
@@ -99,27 +105,37 @@ namespace games
 			L"开始游戏",
 			lstrlenW(L"开始游戏"),
 			selectButtonFont,
-			// RectF参数为left, top, right, bottom
 			D2D1::RectF(left, top, right, bottom),
 			0xffffff);
         if (UIControl::TextButton(state, 1, selectButtonFont, L"", left, top, right, bottom, color))
         {
-			
             BeginGames();
         }
 
         top += 50;
         bottom = top + 40;
-        if (UIControl::TextButton(state, 2, selectButtonFont, L"统计数据", left, top, right, bottom, color))
+		Graphics::Instance().DrawText(
+			L"统计数据",
+			lstrlenW(L"统计数据"),
+			selectButtonFont,
+			D2D1::RectF(left, top, right, bottom),
+			0xffffff);
+        if (UIControl::TextButton(state, 2, selectButtonFont, L"", left, top, right, bottom, color))
         {
             Statistics();
         }
 
 		top += 50;
 		bottom = top + 40;
-		if (UIControl::TextButton(state, 3, selectButtonFont, L"关于作者", left, top, right, bottom, color))
+		Graphics::Instance().DrawText(
+			L"关于作者",
+			lstrlenW(L"关于作者"),
+			selectButtonFont,
+			D2D1::RectF(left, top, right, bottom),
+			0xffffff);
+		if (UIControl::TextButton(state, 3, selectButtonFont, L"", left, top, right, bottom, color))
 		{
-			Statistics();
+			About();
 		}
 
         UIFinish(state);

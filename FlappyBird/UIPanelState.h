@@ -25,6 +25,7 @@ namespace games
         void UpdateGround(float ElapsedTime);
         void BeginGames();
         void Statistics();
+		void About();
 
     private:
         UIState state;

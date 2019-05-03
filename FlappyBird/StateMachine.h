@@ -10,6 +10,7 @@ namespace games
         GAME_STATUS,
         UI_PANEL_STATUS,
         UI_STATISTICS,
+		UI_ABOUT,
 	};
 
     class IStateMachine;
