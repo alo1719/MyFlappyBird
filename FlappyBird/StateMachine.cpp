@@ -6,6 +6,7 @@
 #include "GameState.h"
 #include "UIPanelState.h"
 #include "Statistics.h"
+#include "About.h"
 
 namespace games
 {
@@ -48,6 +49,7 @@ namespace games
         RegisteStateMachine(GameStatus::GAME_STATUS, &games::GameState::instance());
         RegisteStateMachine(GameStatus::UI_PANEL_STATUS, &games::UIPanelState::instance());
         RegisteStateMachine(GameStatus::UI_STATISTICS, &games::Statistics::instance());
+		RegisteStateMachine(GameStatus::UI_ABOUT, &games::About::instance());
         // ³õÊ¼×´Ì¬
         NextState(GameStatus::UI_PANEL_STATUS);
 	}

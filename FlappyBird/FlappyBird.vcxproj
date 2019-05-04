@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="About.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="BaseStateMachine.cpp" />
@@ -45,6 +46,7 @@
     <ClCompile Include="Ulit.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="About.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Application.h" />
     <ClInclude Include="BaseStateMachine.h" />
