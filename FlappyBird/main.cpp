@@ -39,7 +39,7 @@ int WINAPI wWinMain(
 	{
         games::APPConfig config;
 		// Define Game Window
-        config.title_ = TEXT("My Flappy Bird");
+        config.title_ = TEXT("Shuttle 2077");
         config.height_ = 600;
         config.width_ = 800;
         config.frame_ = 65;

@@ -15,17 +15,11 @@ namespace games
 
 		static About &instance();
 
-		void LastScore(int score);
-		void TrainLastScore(int score);
-
 		virtual void Run();
 		virtual void OnRender();
 		virtual void OnRenderUI();
 		virtual void OnMouseEvent(MouseEvent event, int x, int y);
 		virtual void OnKeywordEvent(KeywordEvent event, unsigned int state);
-	private:
-
-		void UpdateGround(float ElapsedTime);
 
 	private:
 		UIState state;
@@ -39,11 +33,5 @@ namespace games
 
 		FontHandle msgFont;
 		FontHandle tipsFont;
-
-		int max_;
-		int last_;
-		int trainMax_;
-		int trainLast_;
 	};
-
 }

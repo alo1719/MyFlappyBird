@@ -43,22 +43,6 @@ namespace games
 		return stat;
 	}
 
-	void About::LastScore(int score)
-	{
-		if (max_ < score)
-			max_ = score;
-		last_ = score;
-	}
-
-	void About::Run()
-	{
-		static DWORD last = GetTickCount();
-		DWORD now = GetTickCount();
-		float use = (now - last) / 1000.f;
-		last = now;
-		UpdateGround(use);
-	}
-
 	void About::OnRender()
 	{
 		D2D1_RECT_F rect{ 0, 0, 800, 600 };
@@ -119,9 +103,7 @@ namespace games
 		}
 	}
 
-	void About::UpdateGround(float ElapsedTime)
+	void About::Run()
 	{
-		// ÒÆ¶¯µØ°å
-		groundOffset = (float)fmod(groundOffset + ElapsedTime * MS_STAGEMOVESPEED, MS_GROUNDWIDTH);
 	}
 }
