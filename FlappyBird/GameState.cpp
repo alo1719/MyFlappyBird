@@ -99,8 +99,12 @@ namespace games
         imgGround = path + L"Resource\\Ground.png";
         imgPipeTop = path + L"Resource\\pipe_top.png";
 		imgPipeTop2 = path + L"Resource\\pipe_top2.png";
+		imgPipeTop3 = path + L"Resource\\pipe_top3.png";
+		imgPipeTop4 = path + L"Resource\\pipe_top4.png";
         imgPipeBottom = path + L"Resource\\pipe_bottom.png";
 		imgPipeBottom2 = path + L"Resource\\pipe_bottom2.png";
+		imgPipeBottom3 = path + L"Resource\\pipe_bottom3.png";
+		imgPipeBottom4 = path + L"Resource\\pipe_bottom4.png";
         imgGetReady = path + L"Resource\\ready.png";
         imgGamesOver = path + L"Resource\\gamesover.png";
 
@@ -132,9 +136,9 @@ namespace games
             fly->addSpriteFrameWithFileName(filename);
         }
         fly->setRestoreOriginalFrame(true);
-        fly->setDelayPerUnit(90);
+        fly->setDelayPerUnit(20);
 
-        // 初始化小鸟Sprite
+        // 初始化Sprite
         std::wstring birdImage = path + L"Resource\\birds\\0.png";
         Graphics::Instance().GetBitmapSize(birdImage, birdSize);
         birds = std::make_shared<Sprite>();
@@ -143,7 +147,7 @@ namespace games
         Restart();
     }
 
-	// 初始化小鸟位置
+	// 初始化位置
     void GameState::initBirdPosition()
     {
         birdHeight = birdSize.height;
@@ -168,6 +172,8 @@ namespace games
             1, MS_PIPECREATETIME * 850, [this] { CreatePipe(); });
 
         birdPathLoggerTime = 0.f;
+		birdSpeed = MS_STAGEMOVESPEED;
+		isDashing = false;
 
         birdV = 0.f;
         birds->runAction(fly.get());
@@ -310,7 +316,7 @@ namespace games
             scoreFont, 
 			// RectF参数为left, top, right, bottom
             D2D1::RectF(300, 0, 500, 100), 
-            0x39b5cc);
+            0xfcbdf6);
 
         if (gameState == GAMESTATE_READY)
         {
@@ -349,11 +355,25 @@ namespace games
                     keyDown = true;
                 }
             }
+			// 按下Control键
+			else if (event == KeywordEvent::KEYDOWN && state == VK_CONTROL)
+			{
+				birdSpeed = 1.5 * MS_STAGEMOVESPEED;
+				isDashing = true;
+				keyDown = true;
+			}
 			// 空格键弹起
-            else if (event == KeywordEvent::KEYRUP && state == VK_SPACE)
-            {
-                keyDown = false;
-            }
+			else if (event == KeywordEvent::KEYRUP && state == VK_SPACE)
+			{
+				keyDown = false;
+			}
+			else if (event == KeywordEvent::KEYRUP && state == VK_CONTROL)
+			{
+				keyDown = false;
+				isDashing = false;
+				birdSpeed = MS_STAGEMOVESPEED;
+				birdV = 0;
+			}
         }
         else if (gameState == GAMESTATE_READY)
         {
@@ -440,18 +460,26 @@ namespace games
 
 			if (hasTopPipe)
 			{
-				if (i->pos.y & 1 == 1) 
+				if (i->pos.y % 4 == 0)
 					Graphics::Instance().DrawBitmap(imgPipeTop, topScreen, topImage);
-				else
+				else if (i->pos.y % 4 == 1)
 					Graphics::Instance().DrawBitmap(imgPipeTop2, topScreen, topImage);
+				else if (i->pos.y % 4 == 2)
+					Graphics::Instance().DrawBitmap(imgPipeTop3, topScreen, topImage);
+				else
+					Graphics::Instance().DrawBitmap(imgPipeTop4, topScreen, topImage);
 			}
             
 			if (hasBottomPipe)
 			{
-				if (i->pos.y & 1 == 1)
-					Graphics::Instance().DrawBitmap(imgPipeBottom, bottomScreen, bottomImage);
+				if (i->pos.y % 4 == 0)
+					Graphics::Instance().DrawBitmap(imgPipeBottom, bottomScreen, bottomImage); 
+				else if (i->pos.y % 4 == 1)
+					Graphics::Instance().DrawBitmap(imgPipeBottom2, bottomScreen, bottomImage); 
+				else if (i->pos.y % 4 == 2)
+					Graphics::Instance().DrawBitmap(imgPipeBottom3, bottomScreen, bottomImage);
 				else
-					Graphics::Instance().DrawBitmap(imgPipeBottom2, bottomScreen, bottomImage);
+					Graphics::Instance().DrawBitmap(imgPipeBottom4, bottomScreen, bottomImage);
 			}
         }
     }
@@ -460,7 +488,7 @@ namespace games
     {
         // 绘制鸟的路径
         for (auto i = birdPath.begin(); i != birdPath.end(); ++i)
-        {
+        {   
             int tPathColor = MS_PATHCOLOR;
             int alpha = 1.f;
             if (i->first > MS_PATHSTARTFADEOUTTIME)
@@ -563,7 +591,8 @@ namespace games
     void GameState::UpdateBird(double ElapsedTime)
     {
         // 改变鸟的垂直位置
-        birdPos.y += birdV * ElapsedTime;
+		if (!isDashing)
+			birdPos.y += birdV * ElapsedTime;
 		// 禁止越界
         if (birdPos.y - MS_BIRDBOUNDINGCIRCLESIZE < 0.f)
             birdPos.y = MS_BIRDBOUNDINGCIRCLESIZE;
@@ -601,7 +630,7 @@ namespace games
         while (i != pipes.end())
         {
             // 计算当前管子位置
-            i->pos.x -= ElapsedTime * MS_STAGEMOVESPEED;
+            i->pos.x -= ElapsedTime * birdSpeed;
 
             // 移除越界管子
             if (i->pos.x + MS_PIPEWIDTH / 2.f < 0.f)
@@ -614,7 +643,7 @@ namespace games
     void GameState::UpdateGround(double ElapsedTime)
     {
         // 移动地板
-	    groundOffset = (float)fmod(groundOffset + ElapsedTime * MS_STAGEMOVESPEED, MS_GROUNDWIDTH);
+	    groundOffset = (float)fmod(groundOffset + ElapsedTime * birdSpeed, MS_GROUNDWIDTH);
     }
 
     void GameState::UpdatePathLogger(double ElapsedTime)
@@ -633,7 +662,7 @@ namespace games
         while (i != birdPath.end())
         {
             i->first += ElapsedTime;
-            i->second.x -= MS_STAGEMOVESPEED * ElapsedTime;
+            i->second.x -= birdSpeed * ElapsedTime;
 
             if (i->first > MS_PATHFADEOUTTIME)
                 i = birdPath.erase(i);

@@ -92,8 +92,12 @@ namespace games
         std::wstring imgGround;
         std::wstring imgPipeTop;
 		std::wstring imgPipeTop2;
+		std::wstring imgPipeTop3;
+		std::wstring imgPipeTop4;
         std::wstring imgPipeBottom;
 		std::wstring imgPipeBottom2;
+		std::wstring imgPipeBottom3;
+		std::wstring imgPipeBottom4;
         std::wstring imgGetReady;
         std::wstring imgGamesOver;
 
@@ -104,8 +108,10 @@ namespace games
         Point birdPos;
         int birdWidth;
         int birdHeight;
+		int birdSpeed;
         float birdV;
         float birdRotation;
+		bool isDashing;
         D2D1_SIZE_F birdSize;
 
         float groundOffset;
