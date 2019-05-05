@@ -16,7 +16,6 @@ namespace games
         static Statistics &instance();
 
         void LastScore(int score);
-        void TrainLastScore(int score);
 
         virtual void Run();
         virtual void OnRender();
@@ -42,8 +41,6 @@ namespace games
 
         int max_;
         int last_;
-        int trainMax_;
-        int trainLast_;
     };
 
 }

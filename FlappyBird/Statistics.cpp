@@ -27,19 +27,17 @@ namespace games
         groundHeight = MS_GROUNDHEIGHT;
         groundOffset = 0.f;
 
-        configFileName = path + L"Resource\\score.txt";
+        configFileName = path + L"Resource\\score.dat";
         std::wfstream file(configFileName, std::ios::in);
 
         if (file)
         {
-            file >> max_ >> last_ >> trainLast_ >> trainMax_;
+            file >> max_ >> last_;
         }
         else
         {
             max_ = 0;
             last_ = 0;
-            trainLast_ = 0;
-            trainMax_ = 0;
         }
         ClearState(state);
     }
@@ -51,7 +49,7 @@ namespace games
 
         if (file)
         {
-            file << max_ << " " << last_ << " " << trainLast_ << " " << trainMax_;
+            file << max_ << " " << last_;
         }
 
         Graphics::Instance().DestroyFontObject(msgFont);
@@ -107,7 +105,7 @@ namespace games
             D2D1::RectF(left, top, left + width, top + height),
             3.f, 3.f
             );
-        Graphics::Instance().FillRoundedRectangle(rect, 0xf0f000, 0.5);
+        Graphics::Instance().FillRoundedRectangle(rect, 0xffffff, 0.5);
 
         std::wstringstream stream;
         stream << L"×î¸ß·Ö: " << max_ << std::endl;

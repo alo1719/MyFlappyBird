@@ -70,7 +70,7 @@ namespace games
 			D2D1::RectF(left, top, left + width, top + height),
 			3.f, 3.f
 		);
-		Graphics::Instance().FillRoundedRectangle(rect, 0xf0f000, 0.5);
+		Graphics::Instance().FillRoundedRectangle(rect, 0xffffff, 0.5);
 
 		std::wstringstream stream;
 		stream << L"制作人: 张心诣" << std::endl;

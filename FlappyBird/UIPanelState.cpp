@@ -98,7 +98,7 @@ namespace games
         float top = (GAMES_SIZE_H - 150 - 100) >> 1;
         float right = left + 100;
         float bottom = top + 40;
-		int32_t color = 0x39b5cc;
+		int32_t color = 0xfcbdf6;
 
 		
 		Graphics::Instance().DrawText(
@@ -106,7 +106,7 @@ namespace games
 			lstrlenW(L"开始游戏"),
 			selectButtonFont,
 			D2D1::RectF(left, top, right, bottom),
-			0xffffff);
+			0x000000);
         if (UIControl::TextButton(state, 1, selectButtonFont, L"", left, top, right, bottom, color))
         {
             BeginGames();
@@ -119,7 +119,7 @@ namespace games
 			lstrlenW(L"统计数据"),
 			selectButtonFont,
 			D2D1::RectF(left, top, right, bottom),
-			0xffffff);
+			0x000000);
         if (UIControl::TextButton(state, 2, selectButtonFont, L"", left, top, right, bottom, color))
         {
             Statistics();
@@ -132,7 +132,7 @@ namespace games
 			lstrlenW(L"关于作者"),
 			selectButtonFont,
 			D2D1::RectF(left, top, right, bottom),
-			0xffffff);
+			0x000000);
 		if (UIControl::TextButton(state, 3, selectButtonFont, L"", left, top, right, bottom, color))
 		{
 			About();
