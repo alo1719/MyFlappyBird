@@ -98,7 +98,9 @@ namespace games
         imgBackground = path + L"Resource\\background.png";
         imgGround = path + L"Resource\\Ground.png";
         imgPipeTop = path + L"Resource\\pipe_top.png";
+		imgPipeTop2 = path + L"Resource\\pipe_top2.png";
         imgPipeBottom = path + L"Resource\\pipe_bottom.png";
+		imgPipeBottom2 = path + L"Resource\\pipe_bottom2.png";
         imgGetReady = path + L"Resource\\ready.png";
         imgGamesOver = path + L"Resource\\gamesover.png";
 
@@ -438,12 +440,18 @@ namespace games
 
 			if (hasTopPipe)
 			{
-				Graphics::Instance().DrawBitmap(imgPipeTop, topScreen, topImage);
+				if (i->pos.y & 1 == 1) 
+					Graphics::Instance().DrawBitmap(imgPipeTop, topScreen, topImage);
+				else
+					Graphics::Instance().DrawBitmap(imgPipeTop2, topScreen, topImage);
 			}
             
 			if (hasBottomPipe)
 			{
-				Graphics::Instance().DrawBitmap(imgPipeBottom, bottomScreen, bottomImage);
+				if (i->pos.y & 1 == 1)
+					Graphics::Instance().DrawBitmap(imgPipeBottom, bottomScreen, bottomImage);
+				else
+					Graphics::Instance().DrawBitmap(imgPipeBottom2, bottomScreen, bottomImage);
 			}
         }
     }

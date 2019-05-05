@@ -91,7 +91,9 @@ namespace games
         std::wstring imgBackground;
         std::wstring imgGround;
         std::wstring imgPipeTop;
+		std::wstring imgPipeTop2;
         std::wstring imgPipeBottom;
+		std::wstring imgPipeBottom2;
         std::wstring imgGetReady;
         std::wstring imgGamesOver;
 
@@ -124,7 +126,7 @@ namespace games
         COLLISIONRESULT collisionResult;
 
         bool died;
-		bool hasTopPipe = false;
+		bool hasTopPipe = true;
 		bool hasBottomPipe = true;
         GAMESTATE gameState;
         FontHandle tipsFont;
