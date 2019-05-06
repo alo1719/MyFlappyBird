@@ -128,14 +128,14 @@ namespace games
 
         // 初始化动画
         fly = std::make_shared<Animation>();
-        for (int i = 0; i < 1; ++i)
+        for (int i = 0; i < 4; ++i)
         {
             TCHAR filename[MAX_PATH];
             wsprintf(filename, L"%sResource\\birds\\%d.png", path.c_str(), i);
             fly->addSpriteFrameWithFileName(filename);
         }
         fly->setRestoreOriginalFrame(true);
-        fly->setDelayPerUnit(20);
+        fly->setDelayPerUnit(480);
 
         // 初始化Sprite
         std::wstring birdImage = path + L"Resource\\birds\\0.png";
