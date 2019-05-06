@@ -176,6 +176,7 @@ namespace games
 		isDashing = false;
 
         birdV = 0.f;
+		gravityV = MS_GRAVITY;
         birds->runAction(fly.get());
     }
 
@@ -280,6 +281,7 @@ namespace games
             else
             {
                 PlaySound(music_hit);
+				gameState = GAMESTATE_DIED;
                 UpdateBird(ElapsedTime);
             }
             break;
@@ -351,7 +353,8 @@ namespace games
                 {
 					// 每次跳起, 播放动画, 改变速度
                     PlaySound(music_wing);
-                    birdV = -MS_BIRDJUMPV;
+                    //birdV = -MS_BIRDJUMPV;
+					gravityV = -gravityV;
                     keyDown = true;
                 }
             }
@@ -598,7 +601,7 @@ namespace games
             birdPos.y = MS_BIRDBOUNDINGCIRCLESIZE;
         if (birdPos.y + MS_GROUNDHEIGHT > GAMES_SIZE_H)
             birdPos.y = GAMES_SIZE_H - MS_GROUNDHEIGHT;
-        birdV += MS_GRAVITY * ElapsedTime;
+        birdV += gravityV * ElapsedTime;
 		// 限制最大速度
         if (birdV >= MS_BIRDMAXV)  
             birdV = MS_BIRDMAXV;

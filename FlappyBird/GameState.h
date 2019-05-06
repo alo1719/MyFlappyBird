@@ -111,6 +111,7 @@ namespace games
 		int birdSpeed;
         float birdV;
         float birdRotation;
+		float gravityV;
 		bool isDashing;
         D2D1_SIZE_F birdSize;
 
