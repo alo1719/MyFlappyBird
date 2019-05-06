@@ -131,14 +131,14 @@ namespace games
         for (int i = 0; i < 4; ++i)
         {
             TCHAR filename[MAX_PATH];
-            wsprintf(filename, L"%sResource\\birds\\%d.png", path.c_str(), i);
+            wsprintf(filename, L"%sResource\\Shuttle\\%d.png", path.c_str(), i);
             fly->addSpriteFrameWithFileName(filename);
         }
         fly->setRestoreOriginalFrame(true);
         fly->setDelayPerUnit(480);
 
         // ≥ı ºªØSprite
-        std::wstring birdImage = path + L"Resource\\birds\\0.png";
+        std::wstring birdImage = path + L"Resource\\Shuttle\\0.png";
         Graphics::Instance().GetBitmapSize(birdImage, birdSize);
         birds = std::make_shared<Sprite>();
         birds->runAction(fly.get());
