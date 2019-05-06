@@ -1,6 +1,7 @@
 #include "main.h"
 #include "UIPanelState.h"
 
+#include "Application.h"
 #include "UIControl.h"
 #include "constant.h"
 #include "Ulit.h"
@@ -100,7 +101,6 @@ namespace games
         float bottom = top + 40;
 		int32_t color = 0xfcbdf6;
 
-		
 		Graphics::Instance().DrawText(
 			L"开始游戏",
 			lstrlenW(L"开始游戏"),
@@ -128,8 +128,8 @@ namespace games
 		top += 50;
 		bottom = top + 40;
 		Graphics::Instance().DrawText(
-			L"关于作者",
-			lstrlenW(L"关于作者"),
+			L"关于游戏",
+			lstrlenW(L"关于游戏"),
 			selectButtonFont,
 			D2D1::RectF(left, top, right, bottom),
 			0x000000);
@@ -148,5 +148,9 @@ namespace games
 
     void UIPanelState::OnKeywordEvent(KeywordEvent event, unsigned int state)
     {
+		if (event == KeywordEvent::KEYDOWN && state == VK_UP)
+		{
+			BeginGames();
+		}
     }
 }

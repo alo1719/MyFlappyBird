@@ -117,7 +117,7 @@ namespace games
             msgFont,
             D2D1::RectF(left + 20, top + 20, left + width - 40, top + height - 70),
             0);
-        msg = L"按空格继续";
+        msg = L"按向上/向下键继续";
         Graphics::Instance().DrawText(
             msg.c_str(),
             msg.length(),
@@ -132,7 +132,7 @@ namespace games
 
     void Statistics::OnKeywordEvent(KeywordEvent event, unsigned int state)
     {
-        if (event == KeywordEvent::KEYDOWN && state == VK_SPACE)
+        if (event == KeywordEvent::KEYDOWN && (state == VK_UP || state == VK_DOWN))
         {
             StateMachine::Instance().NextState(GameStatus::UI_PANEL_STATUS);
         }

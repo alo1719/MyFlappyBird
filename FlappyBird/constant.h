@@ -15,17 +15,17 @@
 
 #define MS_STAGEMOVESPEED 275   // 移动速度, 默认150
 #define MS_PIPECREATETIME 1.2   // 管子创建时间间隔, 默认1.7
-#define MS_PIPEGAPHEIGHT  100   // 管子间隙高度, 默认100
+#define MS_PIPEGAPHEIGHT  120   // 管子间隙高度, 默认100
 #define MS_PIPECREATEYMINRESERVED  10.f
 #define MS_PIPECREATEYMAXRESERVED  50.f
 #define MS_PIPECREATEYMIN (GAMES_SIZE_H - MS_PIPEHEIGHT - (MS_PIPEGAPHEIGHT / 2.f) + MS_PIPECREATEYMINRESERVED) // 管子间隙中心最小Y值
 #define MS_PIPECREATEYMAX (MS_PIPEHEIGHT + (MS_PIPEGAPHEIGHT / 2.f) - MS_PIPECREATEYMAXRESERVED)              // 管子间隙中心最大Y值
 
 #define MS_BIRDCENTERX  200.f            // 鸟的水平位置
-#define MS_BIRDBOUNDINGCIRCLESIZE 6.f   // 鸟的包围圆半径, 默认10
+#define MS_BIRDBOUNDINGCIRCLESIZE 5.f   // 鸟的包围圆半径, 默认10
 #define MS_GRAVITY  980.f                // 重力加速度
 #define MS_BIRDJUMPV 300.f               // 按下按键后鸟的速度, 默认360
-#define MS_BIRDMAXV  600.f               // 鸟的最大速度
+#define MS_BIRDMAXV  400.f               // 鸟的最大速度, 默认600
 #define MS_BIRDDROPV 400.f               // 旋转完成速度
 #define MS_BIRD_BEGIN_DROP 250.F         // 开始旋转速度
 

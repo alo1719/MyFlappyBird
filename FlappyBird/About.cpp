@@ -15,7 +15,7 @@ namespace games
 	About::About()
 	{
 		msgFont = Graphics::Instance().CreateFontObject(L"微软雅黑", 18);
-		tipsFont = Graphics::Instance().CreateFontObject(L"微软雅黑", 14);
+		tipsFont = Graphics::Instance().CreateFontObject(L"微软雅黑", 13);
 		Graphics::Instance().FontCenter(tipsFont);
 
 		std::wstring &path = GetAppPath();
@@ -73,16 +73,18 @@ namespace games
 		Graphics::Instance().FillRoundedRectangle(rect, 0xffffff, 0.5);
 
 		std::wstringstream stream;
-		stream << L"制作人: 张心诣" << std::endl;
-		stream << L"学号: 2016141463067" << std::endl;
+		stream << L"使用方向上键/方向下键控制引力的方向" << std::endl;
+		stream << L"按下Shift键启用引力激增, 可以增大引力并突破最大速度限制" << std::endl;
+		stream << L"在开始菜单按下方向上键可以快速开始游戏" << std::endl;
+		stream << L"2016141463067张心诣" << std::endl;
 		std::wstring msg = stream.str();
 		Graphics::Instance().DrawText(
 			msg.c_str(),
 			msg.length(),
-			msgFont,
+			tipsFont,
 			D2D1::RectF(left + 20, top + 20, left + width - 40, top + height - 70),
 			0);
-		msg = L"按空格继续";
+		msg = L"按向上/向下键继续";
 		Graphics::Instance().DrawText(
 			msg.c_str(),
 			msg.length(),
@@ -97,7 +99,7 @@ namespace games
 
 	void About::OnKeywordEvent(KeywordEvent event, unsigned int state)
 	{
-		if (event == KeywordEvent::KEYDOWN && state == VK_SPACE)
+		if (event == KeywordEvent::KEYDOWN && (state == VK_UP || state == VK_DOWN))
 		{
 			StateMachine::Instance().NextState(GameStatus::UI_PANEL_STATUS);
 		}

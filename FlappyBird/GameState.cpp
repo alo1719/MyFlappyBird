@@ -91,8 +91,7 @@ namespace games
         pMusicManager->AddMusic(music_point);
 
 		// 创建线程
-        g_hThreadForMusic = (HANDLE)_beginthreadex(NULL, 0, 
-            pMusicManager->ThreadForPlayMusic, NULL, 0, NULL);
+        g_hThreadForMusic = (HANDLE)_beginthreadex(NULL, 0, pMusicManager->ThreadForPlayMusic, NULL, 0, NULL);
 
         // 初始化素材部分
         imgBackground = path + L"Resource\\background.png";
@@ -127,7 +126,7 @@ namespace games
             (GAMES_SIZE_H + size.height - 100) / 2,
         };
 
-        // 初始化小鸟动画
+        // 初始化动画
         fly = std::make_shared<Animation>();
         for (int i = 0; i < 1; ++i)
         {
@@ -171,12 +170,12 @@ namespace games
         pipeTimer = TimeCounter::instance().Schedule(
             1, MS_PIPECREATETIME * 850, [this] { CreatePipe(); });
 
-        birdPathLoggerTime = 0.f;
 		birdSpeed = MS_STAGEMOVESPEED;
-		isDashing = false;
-
         birdV = 0.f;
+		isDashing = false;
+        birdPathLoggerTime = 0.f;
 		gravityV = MS_GRAVITY;
+
         birds->runAction(fly.get());
     }
 
@@ -200,7 +199,10 @@ namespace games
     {
         score = 0;
 
+		birdSpeed = MS_STAGEMOVESPEED;
         birdV = 0.f;
+		isDashing = false;
+		gravityV = MS_GRAVITY;
         initBirdPosition();
         birds->setRotation(0.f, D2D1::Point2F(birdPos.x, birdPos.y));
 
@@ -281,7 +283,8 @@ namespace games
             else
             {
                 PlaySound(music_hit);
-				gameState = GAMESTATE_DIED;
+				birdV = 600;
+				gravityV = MS_GRAVITY;
                 UpdateBird(ElapsedTime);
             }
             break;
@@ -332,7 +335,7 @@ namespace games
 			// 在图像下方绘制提示字体
             rect.top = rect.bottom + 10;
             rect.bottom += 40;
-            wstring msg = L"按空格继续";
+            wstring msg = L"按向上/向下键继续";
             Graphics::Instance().DrawText(
                 msg.c_str(), msg.length(), tipsFont, rect, 0);
         }
@@ -346,41 +349,53 @@ namespace games
     {
         if (gameState == GAMESTATE_PLAYING)
         {
-			// 按下了空格键
-            if (event == KeywordEvent::KEYDOWN && state == VK_SPACE)
+			// 按下了向上键
+            if (event == KeywordEvent::KEYDOWN && state == VK_UP)
             {
-                if (!keyDown)
+                if (!keyDown && gravityV > 0)
                 {
-					// 每次跳起, 播放动画, 改变速度
                     PlaySound(music_wing);
-                    //birdV = -MS_BIRDJUMPV;
 					gravityV = -gravityV;
                     keyDown = true;
                 }
             }
-			// 按下Control键
-			else if (event == KeywordEvent::KEYDOWN && state == VK_CONTROL)
+			// 按下了向下键
+			else if (event == KeywordEvent::KEYDOWN && state == VK_DOWN)
 			{
-				birdSpeed = 1.5 * MS_STAGEMOVESPEED;
+				if (!keyDown && gravityV < 0)
+				{
+					PlaySound(music_wing);
+					gravityV = -gravityV;
+					keyDown = true;
+				}
+			}
+			// 按下Shift键
+			else if (event == KeywordEvent::KEYDOWN && state == VK_SHIFT)
+			{
+				if (gravityV < 0)
+					gravityV = -2 * MS_GRAVITY;
+				else
+					gravityV = 2 * MS_GRAVITY;
 				isDashing = true;
-				keyDown = true;
 			}
-			// 空格键弹起
-			else if (event == KeywordEvent::KEYRUP && state == VK_SPACE)
+			// 方向键弹起
+			else if (event == KeywordEvent::KEYRUP && (state == VK_UP || state == VK_DOWN))
 			{
 				keyDown = false;
 			}
-			else if (event == KeywordEvent::KEYRUP && state == VK_CONTROL)
+			// Shift键弹起
+			else if (event == KeywordEvent::KEYRUP && state == VK_SHIFT)
 			{
-				keyDown = false;
+				if (gravityV < 0)
+					gravityV = -MS_GRAVITY;
+				else
+					gravityV = MS_GRAVITY;
 				isDashing = false;
-				birdSpeed = MS_STAGEMOVESPEED;
-				birdV = 0;
 			}
         }
         else if (gameState == GAMESTATE_READY)
         {
-            if (event == KeywordEvent::KEYDOWN && state == VK_SPACE)
+            if (event == KeywordEvent::KEYDOWN && (state == VK_UP || state == VK_DOWN))
             {
                 Begin();
                 gameState = GAMESTATE_PLAYING;
@@ -388,7 +403,7 @@ namespace games
         }
         else if (gameState == GAMESTATE_DIED)
         {
-            if (event == KeywordEvent::KEYDOWN && state == VK_SPACE)
+            if (event == KeywordEvent::KEYDOWN && (state == VK_UP || state == VK_DOWN))
             {
 				// 显示计分板并重置游戏
                 StateMachine::Instance().NextState(GameStatus::UI_STATISTICS);
@@ -461,7 +476,7 @@ namespace games
 			bottomImage.top = 0;
 			bottomImage.bottom = bottomScreen.bottom - bottomScreen.top;
 
-			if (hasTopPipe)
+			if (i->Index % 2 == 1)
 			{
 				if (i->pos.y % 4 == 0)
 					Graphics::Instance().DrawBitmap(imgPipeTop, topScreen, topImage);
@@ -473,7 +488,8 @@ namespace games
 					Graphics::Instance().DrawBitmap(imgPipeTop4, topScreen, topImage);
 			}
             
-			if (hasBottomPipe)
+			if ((i->Index % 2 == 0) || ((i->Index % 5 == 0) && (i->Index > 10)) 
+				|| ((i->Index % 3 == 0)&&(i->Index > 30)))
 			{
 				if (i->pos.y % 4 == 0)
 					Graphics::Instance().DrawBitmap(imgPipeBottom, bottomScreen, bottomImage); 
@@ -546,12 +562,13 @@ namespace games
             bottom.top = i->pos.y + MS_PIPEGAPHEIGHT / 2.f;
             bottom.bottom = GAMES_SIZE_H - MS_GROUNDHEIGHT;
 
-			if (hasTopPipe)
+			if (i->Index & 1 == 1)
 			{
 				Graphics::Instance().DrawRectangle(top, 0xff0000);
 			}
 
-			if (hasBottomPipe)
+			if ((i->Index % 2 == 0) || ((i->Index % 5 == 0) && (i->Index > 10))
+				|| ((i->Index % 3 == 0) && (i->Index > 30)))
 			{
 				Graphics::Instance().DrawRectangle(bottom, 0xff0000);
 			}
@@ -594,17 +611,41 @@ namespace games
     void GameState::UpdateBird(double ElapsedTime)
     {
         // 改变鸟的垂直位置
-		if (!isDashing)
-			birdPos.y += birdV * ElapsedTime;
+		birdPos.y += birdV * ElapsedTime;
 		// 禁止越界
         if (birdPos.y - MS_BIRDBOUNDINGCIRCLESIZE < 0.f)
             birdPos.y = MS_BIRDBOUNDINGCIRCLESIZE;
         if (birdPos.y + MS_GROUNDHEIGHT > GAMES_SIZE_H)
             birdPos.y = GAMES_SIZE_H - MS_GROUNDHEIGHT;
         birdV += gravityV * ElapsedTime;
+		D2D1_POINT_2F p1{ 0, 0 },
+			p2{ GAMES_SIZE_W, 0 };
+		D2D1_ELLIPSE ellipse{
+			{ birdPos.x, birdPos.y },
+			MS_BIRDBOUNDINGCIRCLESIZE,
+			MS_BIRDBOUNDINGCIRCLESIZE };
+		if (Collision::CircleLineHitTest(ellipse, p1, p2))
+		{
+			// 撞顶之后反弹
+			birdV = -birdV;
+			birdPos.y += 3;
+		}
 		// 限制最大速度
-        if (birdV >= MS_BIRDMAXV)  
-            birdV = MS_BIRDMAXV;
+		if (!isDashing)
+		{
+			if (birdV >= MS_BIRDMAXV)
+				birdV = MS_BIRDMAXV;
+			if (birdV <= -MS_BIRDMAXV)
+				birdV = -MS_BIRDMAXV;
+		}
+		else
+		{
+			if (birdV >= 1.8 * MS_BIRDMAXV)
+				birdV = 1.8 * MS_BIRDMAXV;
+			if (birdV <= -1.8 * MS_BIRDMAXV)
+				birdV = -1.8 * MS_BIRDMAXV;
+		}
+        
 
         birds->setPosition(
             birdPos.x - birdWidth / 2, 
@@ -716,7 +757,7 @@ namespace games
             bottom.bottom = GAMES_SIZE_H - MS_GROUNDHEIGHT;
 
             // 进行顶部碰撞检测
-			if (hasTopPipe)
+			if (i->Index & 1 == 1)
 			{
 				if (Collision::OBBCircleHitTest(top, ellipse))
 				{
@@ -726,7 +767,8 @@ namespace games
 			}
             
 			// 进行底部碰撞检测
-			if (hasBottomPipe)
+			if ((i->Index % 2 == 0) || ((i->Index % 5 == 0) && (i->Index > 10))
+				|| ((i->Index % 3 == 0) && (i->Index > 30)))
 			{
 				if (Collision::OBBCircleHitTest(bottom, ellipse))
 				{
@@ -760,8 +802,9 @@ namespace games
 
     void GameState::PassPipe()
     {
-        score++;
-        PlaySound(music_point);
+        score += 5;
+		if (score % 25 == 0)
+			PlaySound(music_point);
     }
 
     void GameState::GetBirdState(float & horizontal, float & vertical, float & ground_distance)

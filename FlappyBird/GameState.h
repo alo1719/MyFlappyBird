@@ -133,8 +133,6 @@ namespace games
         COLLISIONRESULT collisionResult;
 
         bool died;
-		bool hasTopPipe = true;
-		bool hasBottomPipe = true;
         GAMESTATE gameState;
         FontHandle tipsFont;
         FontHandle scoreFont;
