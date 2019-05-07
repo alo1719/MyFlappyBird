@@ -23,7 +23,7 @@ namespace games
             if (!handler->child_)
                 return;
 
-            // 因为需要 detach，所以这里接管对象
+            // 因为需要detach, 所以这里接管对象
             std::thread thread([handler] {
                 auto result = handler->child_();
                 if (handler->main_)
@@ -76,7 +76,7 @@ namespace games
             if (!handler->child_)
                 return;
 
-            // 因为需要 detach，所以这里接管对象
+            // 因为需要detach, 所以这里接管对象
             std::thread thread([handler] {
                 handler->child_();
                 if (handler->main_)

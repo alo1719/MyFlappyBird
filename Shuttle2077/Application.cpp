@@ -353,6 +353,4 @@ namespace games
 	{
 		Graphics::Instance().OnResize(width_, height_);
 	}
-
-
 }

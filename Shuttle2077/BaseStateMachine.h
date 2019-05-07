@@ -20,9 +20,7 @@ namespace games
         virtual void PrevNextState() = 0;
     };
 
-	//
-	// 状态机进一步封装，以适应当前的基础Framework
-	//
+	// 状态机进一步封装, 以适应当前的基础Framework
 	class BaseStateMachine : public IStateMachine
 	{
 	public:

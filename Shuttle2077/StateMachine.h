@@ -15,9 +15,7 @@ namespace games
 
     class IStateMachine;
 
-	//
 	// state machine manager
-	// 
 	class StateMachine
 	{
 	public:

@@ -18,7 +18,6 @@ namespace games
 
     TimeCounter::TimeCounter()
     {
-        // TODO: 时钟频率不对劲
         QueryPerformanceFrequency(&litmp);
         dfFreq = (double)litmp.QuadPart;// 获得计数器的时钟频率
         use = 0;

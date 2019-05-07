@@ -2,8 +2,6 @@
 
 namespace games 
 {
-    // TODO: 改变计时器 update 方式，使得与 frame 脱离关系
-    // 
     struct Counter {
         int id;
         int priority;
